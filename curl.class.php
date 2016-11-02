@@ -1,11 +1,4 @@
 <?php
-/**
- * @class: CURL
- * @version: 1.0
- * @author: phptuts
- * @link: http://2tuts.com/
- */
-
 class NEWCURL
 {
     var $contents;
@@ -155,4 +148,31 @@ class NEWCURL
     {
         curl_close($this->ch);
     }
+}
+
+function curl1($url){
+	if (strpos($url,'drive.google') == true) {
+		if (preg_match('@https?://(?:[\w\-]+\.)*(?:drive|docs)\.google\.com/(?:(?:folderview|open|uc)\?(?:[\w\-\%]+=[\w\-\%]*&)*id=|(?:folder|file|document|presentation)/d/|spreadsheet/ccc\?(?:[\w\-\%]+=[\w\-\%]*&)*key=)([\w\-]{28,})@i', $url, $match)) {
+            $id = $match[1];
+			$u = 'https://drive.google.com/file/d/'.$id.'/view?pli=1';
+        }
+	}else{
+		$u = $url;
+	}
+
+    $curl = new NEWCURL;
+     $curl->get('https://www.proxfree.com/','',2);
+     $curl->httpheader = array(
+     'Referer:https://de.proxfree.com/permalink.php?url=eKcKvRAsZMJp3EkmD1K78%2Bqx%2FrqnRtIHySNzmMxUbxvJ%2FxfYKDbfQTtfxlzFz63ZA2PxrVLbAzRji7PR98co4KUo8OToTy25nhXHdedVcXsUt3WZdBKH09owwj58mvXq&bit=1',
+    'Upgrade-Insecure-Requests:1',
+    'Content-Type:application/x-www-form-urlencoded',
+    'Cache-Control:max-age=0',
+    'Connection:keep-alive',
+    'Accept-Language:en-US,en;q=0.8,vi;q=0.6,und;q=0.4',
+
+     );
+
+     $y=( $curl->post('https://de.proxfree.com/request.php?do=go&bit=1',"pfipDropdown=default&get=$u",4) );
+
+     return ($curl->get($y[0]["Location"],'',2));
 }
