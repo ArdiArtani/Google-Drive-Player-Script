@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 if(!function_exists('curl1'))
-require_once dirname(__FILE__).'/curl.php';
+require_once dirname(__FILE__).'/curl.class.php';
 function Drive($link) {
 	$url = urldecode($link);
 	$get = curl1($url);
