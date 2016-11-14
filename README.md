@@ -1,4 +1,5 @@
-# Google-Drive-Streaming-Link-Grabber-PHP
+# Google Drive Player Script
+
 Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..)
 
 You can use it for video players (jwplayer, videojs, flowplayer etc)
