@@ -1,5 +1,8 @@
 # Google Drive Player Script
 
+<strong>Note: This project is NOT maintained. I don't provide any support for it.</strong>
+
+
 Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..)
 
 You can use it for video players (jwplayer, videojs, flowplayer etc)
