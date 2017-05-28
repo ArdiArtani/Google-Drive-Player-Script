@@ -14,5 +14,5 @@ You can use it for video players (jwplayer, videojs, flowplayer etc)
 
 <img src="http://i.imgur.com/AbIzM80.png" />
 
-<a href="http://ardiartani.com/donate" target="_blank"><img src="https://static1.squarespace.com/static/528e97bbe4b0e2f77a6e1455/t/5293fa7ae4b0f601b40ec24e/1385429627883/Donatebutton.png" width="120px" /></a>
+<a target="_blank" href="http://ardiartani.com/donate"><img src="https://static1.squarespace.com/static/528e97bbe4b0e2f77a6e1455/t/5293fa7ae4b0f601b40ec24e/1385429627883/Donatebutton.png" width="120px" /></a>
 
