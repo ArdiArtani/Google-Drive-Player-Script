@@ -1,6 +1,6 @@
 # Google Drive Player Script
 
-<strong>Note: Work on progress, updates coming soon</strong>
+<strong>Note: Trying to fix the 403 error. Updates coming soon</strong>
 
 
 Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..)
@@ -13,3 +13,6 @@ You can use it for video players (jwplayer, videojs, flowplayer etc)
 <img src="http://i.imgur.com/ofpW2pF.png" />
 
 <img src="http://i.imgur.com/AbIzM80.png" />
+
+<br />
+<a href="http://paypal.me/ArdiArtani"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /></a>
