@@ -15,4 +15,4 @@ You can use it for video players (jwplayer, videojs, flowplayer etc)
 <img src="http://i.imgur.com/AbIzM80.png" />
 
 <br />
-<a href="http://paypal.me/ArdiArtani"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /></a>
+<a href="http://paypal.me/ArdiArtani" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /></a>
