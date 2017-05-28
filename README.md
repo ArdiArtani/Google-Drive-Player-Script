@@ -1,6 +1,6 @@
 # Google Drive Player Script
 
-<strong>Note: I am working to fix it. Updates coming soon</strong>
+<strong>Note: Work on progress, updates coming soon</strong>
 
 
 Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..)
