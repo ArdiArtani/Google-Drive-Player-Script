@@ -1,7 +1,6 @@
 # Google Drive Player Script
 
-<strong>Note: Trying to fix the 403 error. Updates coming soon</strong>
-
+<strong>NEW VERISON: Grabs only one streaming link</strong>
 
 Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..)
 
