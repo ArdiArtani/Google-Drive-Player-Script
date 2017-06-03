@@ -21,6 +21,57 @@ define('HDOM_INFO_ENDSPACE',7);
 // helper functions
 // -----------------------------------------------------------------------------
 // get html dom form file
+
+
+//Check cache
+function Drive($link) {
+	$timeout = 900;
+	$file_name = md5('AA'.$link.'A3Code');
+	if(file_exists('cache/'.$file_name.'.cache')) {
+		$fopen = file_get_contents('cache/'.$file_name.'.cache');
+		$data = explode('@@', $fopen);
+		$now = gmdate('Y-m-d H:i:s', time() + 3600*(+7+date('I')));
+		$times = strtotime($now) - $data[0];
+		if($times >= $timeout) {
+			$tmp = explode("file/d/",$link);
+			$tmp2 = explode("/",$tmp[1]);
+			$id = $tmp2[0];
+			$linkdown = trim(getlink($id));
+			$create_cache	= gd_cache($link, $linkdown);
+			$arrays = explode('|', $create_cache);
+			$cache = $arrays[0];
+		} else {
+			$cache = $data[1];
+		}
+	} else {
+		$tmp = explode("file/d/",$link);
+		$tmp2 = explode("/",$tmp[1]);
+		$id = $tmp2[0];
+		$linkdown = trim(getlink($id));
+		$create_cache	= gd_cache($link, $linkdown);
+		$arrays = explode('|', $create_cache);
+		$cache = $arrays[0];
+	}
+	return $cache;
+}
+
+//New cache
+function gd_cache($link, $source) {
+	$time = gmdate('Y-m-d H:i:s', time() + 3600*(+7+date('I')));
+	$file_name = md5('AA'.$link.'A3Code');
+	$string = strtotime($time).'@@'.$source;
+	$file = fopen("cache/".$file_name.".cache",'w');
+	fwrite($file,$string);
+	fclose($file);
+
+	if(file_exists('cache/'.$file_name.'.cache')) {
+		$msn = $source;
+	} else {
+		$msn = $source;
+	}
+	return $msn;
+}
+
 function getlink($id){
 	$link = "https://drive.google.com/uc?export=download&id=$id";
 	$ch = curl_init();
