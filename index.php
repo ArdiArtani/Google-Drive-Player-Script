@@ -4,10 +4,7 @@ include "curl_gd.php";
 
 if($_POST['submit'] != ""){
 	$url = $_POST['url'];
-	$tmp = explode("file/d/",$url);
-	$tmp2 = explode("/",$tmp[1]);
-	$id = $tmp2[0];
-	$linkdown = trim(getlink($id));
+	$linkdown = Drive($url);
 }
 ?>
 <!doctype html>
