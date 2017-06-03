@@ -22,6 +22,9 @@ define('HDOM_INFO_ENDSPACE',7);
 // -----------------------------------------------------------------------------
 // get html dom form file
 
+if (!file_exists('cache')) {
+    mkdir('cache', 0777, true);
+}
 
 //Check cache
 function Drive($link) {
