@@ -22,6 +22,7 @@ define('HDOM_INFO_ENDSPACE',7);
 // -----------------------------------------------------------------------------
 // get html dom form file
 
+//Create folder if it doesn't already exist
 if (!file_exists('cache')) {
     mkdir('cache', 0777, true);
 }
