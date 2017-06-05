@@ -5,6 +5,7 @@ include "curl_gd.php";
 if($_POST['submit'] != ""){
 	$url = $_POST['url'];
 	$linkdown = Drive($url);
+	$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$linkdown.'"}]';
 }
 ?>
 <!doctype html>
@@ -15,9 +16,6 @@ if($_POST['submit'] != ""){
 </head>
 <body>
 
-	<!-- Styles -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/2.0.13/plyr.css">
-
   <!-- Docs styles -->
   <link rel="stylesheet" href="https://cdn.plyr.io/2.0.13/demo.css">
 	<style>
@@ -25,33 +23,31 @@ if($_POST['submit'] != ""){
 		  max-width: 800px;
 		  margin: 0 auto;
 		}
-		.plyr {
-		  border-radius: 4px;
-		  margin-bottom: 15px;
-		}
 	</style>
 
 	<div class="container">
+		<br />
 		<form action="" method="POST">
 			<input type="text" size="80" name="url" value="https://drive.google.com/file/d/0ByaRd0R0Qyatcmw2dVhQS0NDU0U/view"/>
 			<input type="submit" value="GET" name="submit" />
 		</form>
-		<br />
+		<br/>
 
-	  <video controls crossorigin>
-	    <!-- Video files -->
-	    <source src="<?php echo $linkdown;?>" type="video/mp4">
+		<div id="myElement">Paste the url and click the get button.</div>
 
-	    <!-- Fallback for browsers that don't support the <video> element -->
-	    <a href="<?php echo $linkdown;?>" download>Download</a>
-	  </video>
 	</div>
 
-	<!-- Plyr core script -->
- <script src="https://cdn.plyr.io/2.0.13/plyr.js"></script>
-
- <!-- Docs script -->
- <script src="https://cdn.plyr.io/2.0.13/demo.js"></script>
+	<script src="https://content.jwplatform.com/libraries/DbXZPMBQ.js"></script>
+	<script type="text/javascript">
+		jwplayer("myElement").setup({
+			playlist: [{
+				"sources":<?php echo $file?>
+			}],
+			allowfullscreen: true,
+			width: '100%',
+			aspectratio: '16:9',
+		});
+	</script>
 
 </body>
 </html>
