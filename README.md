@@ -1,7 +1,9 @@
 
 # Google Drive Player Script
 
-> <strong>NEW TEMP VERISON: Grabs the download link</strong>
+```diff
+- <b>NEW TEMP VERISON: Grabs the download link</b>
+```
 
 <a target="_blank" href="http://google.filedeo.com/">DEMO</a>
 > Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, flowplayer etc).
