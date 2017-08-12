@@ -29,7 +29,7 @@ if($_POST['submit'] != ""){
 		<br />
 		<form action="" method="POST">
 			<input type="text" size="80" name="url" value="https://drive.google.com/file/d/0ByaRd0R0Qyatcmw2dVhQS0NDU0U/view"/>
-			<input type="submit" value="GET" name="submit" />
+			<input type="submit" value="PLAY" name="submit" />
 		</form>
 		<br/>
 
