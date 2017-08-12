@@ -119,9 +119,10 @@ function locheader($page){
 	$temp = explode("\r\n", $page);
 	foreach ($temp as $item) {
 		$temp2 = explode(": ", $item);
-		$infoheader[$temp2[0]] = $temp2[1];
+                if(!empty($temp2[1]))
+                    $infoheader[$temp2[0]] = $temp2[1];
 	}
-	$location = $infoheader['Location'];
+	$location = empty($infoheader['Location']) ? NULL : $infoheader['Location'];
 	return $location;
 }
 
@@ -1064,5 +1065,3 @@ class simple_html_dom {
     function getElementsByTagName($name, $idx=-1) {return $this->find($name, $idx);}
     function loadFile() {$args = func_get_args();$this->load(call_user_func_array('file_get_contents', $args), true);}
 }
-
-?>
