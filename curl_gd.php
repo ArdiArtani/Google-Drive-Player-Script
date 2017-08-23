@@ -37,9 +37,10 @@ function Drive($link) {
 		$now = gmdate('Y-m-d H:i:s', time() + 3600*(+7+date('I')));
 		$times = strtotime($now) - $data[0];
 		if($times >= $timeout) {
-			$tmp = explode("file/d/",$link);
-			$tmp2 = explode("/",$tmp[1]);
-			$id = $tmp2[0];
+			// $tmp = explode("file/d/",$link);
+			// $tmp2 = explode("/",$tmp[1]);
+			// $id = $tmp2[0];
+      $id = get_drive_id($link);
 			$linkdown = trim(getlink($id));
 			$create_cache	= gd_cache($link, $linkdown);
 			$arrays = explode('|', $create_cache);
@@ -48,9 +49,10 @@ function Drive($link) {
 			$cache = $data[1];
 		}
 	} else {
-		$tmp = explode("file/d/",$link);
-		$tmp2 = explode("/",$tmp[1]);
-		$id = $tmp2[0];
+    // $tmp = explode("file/d/",$link);
+    // $tmp2 = explode("/",$tmp[1]);
+    // $id = $tmp2[0];
+    $id = get_drive_id($link);
 		$linkdown = trim(getlink($id));
 		$create_cache	= gd_cache($link, $linkdown);
 		$arrays = explode('|', $create_cache);
@@ -115,14 +117,83 @@ function getlink($id){
 	return $get;
 }
 
+function my_simple_crypt( $string, $action = 'e' ) {
+  $secret_key = 'drivekey';
+  $secret_iv = 'google';
+  $output = false;
+  $encrypt_method = "AES-256-CBC";
+  $key = hash( 'sha256', $secret_key );
+  $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
+  if( $action == 'e' ) {
+    $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
+  }else if( $action == 'd' ){
+    $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
+  }
+  return $output;
+}
+
+function get_drive_id($string) {
+  if (strpos($string, "/edit")) {
+    $string = str_replace("/edit", "/view", $string);
+  } else if (strpos($string, "?id=")) {
+    $parts = parse_url($string);
+    parse_str($parts['query'], $query);
+    return $query['id'];
+  } else if (!strpos($string, "/view")) {
+    $string = $string . "/view";
+  }
+  $start  = "file/d/";
+  $end    = "/view";
+  $string = " " . $string;
+  $ini    = strpos($string, $start);
+  if ($ini == 0) {
+    return "";
+  }
+  $ini += strlen($start);
+  $len = strpos($string, $end, $ini) - $ini;
+  return substr($string, $ini, $len);
+}
+
+function file_get_contents_curl($url) {
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+  $data = curl_exec($ch);
+  curl_close($ch);
+  return $data;
+}
+
+function fetch_value($str, $find_start = '', $find_end = ''){
+  if ($find_start == '') {
+      return '';
+  }
+  $start = strpos($str, $find_start);
+  if ($start === false) {
+      return '';
+  }
+  $length = strlen($find_start);
+  $substr = substr($str, $start + $length);
+  if ($find_end == '') {
+      return $substr;
+  }
+  $end = strpos($substr, $find_end);
+  if ($end === false) {
+      return $substr;
+  }
+
+  return substr($substr, 0, $end);
+}
+
 function locheader($page){
 	$temp = explode("\r\n", $page);
 	foreach ($temp as $item) {
 		$temp2 = explode(": ", $item);
-                if(!empty($temp2[1]))
-                    $infoheader[$temp2[0]] = $temp2[1];
+		$infoheader[$temp2[0]] = $temp2[1];
 	}
-	$location = empty($infoheader['Location']) ? NULL : $infoheader['Location'];
+	$location = $infoheader['Location'];
 	return $location;
 }
 
@@ -1065,3 +1136,5 @@ class simple_html_dom {
     function getElementsByTagName($name, $idx=-1) {return $this->find($name, $idx);}
     function loadFile() {$args = func_get_args();$this->load(call_user_func_array('file_get_contents', $args), true);}
 }
+
+?>
