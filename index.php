@@ -1,18 +1,20 @@
 <?php
-error_reporting(0);
-include "curl_gd.php";
+	error_reporting(0);
+	include "curl_gd.php";
 
-if($_POST['submit'] != ""){
-	$url = $_POST['url'];
-	$linkdown = Drive($url);
-	$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$linkdown.'"}]';
-}
+	if($_POST['submit'] != ""){
+		$url = $_POST['url'];
+		$gid = get_drive_id($url);
+		$iframeid = my_simple_crypt($gid);
+		$linkdown = Drive($url);
+		$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$linkdown.'"}]';
+	}
 ?>
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-	<title>Get link Google Drive</title>
+	<title>Embed google drive generator</title>
 </head>
 <body>
 
@@ -29,11 +31,13 @@ if($_POST['submit'] != ""){
 		<br />
 		<form action="" method="POST">
 			<input type="text" size="80" name="url" value="https://drive.google.com/file/d/0ByaRd0R0Qyatcmw2dVhQS0NDU0U/view"/>
-			<input type="submit" value="PLAY" name="submit" />
+			<input type="submit" value="GET" name="submit" />
 		</form>
 		<br/>
 
 		<div id="myElement">Paste the url and click the get button.</div>
+
+		<div><?php if($iframeid){echo '<textarea style="margin:10px;width: 97%;height: 80px;">&lt;iframe src="http://google.filedeo.com/embed.php?url='.$iframeid.'" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen&gt;&lt;/iframe&gt;</textarea>';}?></div>
 
 	</div>
 
