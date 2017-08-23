@@ -5,7 +5,7 @@
 
 <a target="_blank" href="http://google.filedeo.com/">DEMO</a>
 > Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, flowplayer etc).
-![](http://i.imgur.com/uLe1vvt.png)
+![](http://i.imgur.com/L2lusZ8.png)
 
 ## Installation
 1. Upload the downloaded .zip into your website's root folder or any other folder you want & Extract It
