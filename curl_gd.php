@@ -131,7 +131,7 @@ function my_simple_crypt( $string, $action = 'e' ) {
   }
   return $output;
 }
-function PosterImg($url) { //pass drive url to get poster img
+function PosterImg($url) { //pass drive preview url to get poster img
 $html = new simple_html_dom();
 $html->load_file($url);
 return $html->find('meta[property=og:image]',0)->attr['content'];
