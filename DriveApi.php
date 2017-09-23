@@ -6,19 +6,13 @@ if($_GET['url'] != ""){
     if (strpos($subfject, 'drive.google.com/file/d/') !== false) {
     $pattern='/(?<=file\/d\/)(.*)(?=\/)/';
     $succefss = preg_match($pattern, $subfject, $maftch);
-    $kzty = "google_drive";
-     $txpex = "drv";
     $dbken = $maftch[0];
 } else if (strpos($subfject, 'drive/v3/files') !== false) {
     $pattern = '/(?<=drive\/v3\/files\/)(.*)(?=\?alt)/';
-     $txpex = "drv3";
      $succefss = preg_match($pattern, $subfject, $maftch);
     $dbken = $maftch[0];
-     $kzty = "google_drive";
 } else {
-    $pattern = 'xx';
-     $txpex = "e";
-     $kzty = "d";
+$dbken = $_GET['url']; //use file id only if url isn't detected.
 }
 	
 	$title = fetch_value(file_get_contents_curl('https://drive.google.com/get_video_info?docid='.$dbken), "title=", "&");
