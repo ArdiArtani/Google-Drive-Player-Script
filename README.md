@@ -3,7 +3,7 @@
 
 <strong>NEW TEMP VERISON: Grabs the download link</strong>
 
-<a target="_blank" href="http://google.filedeo.com/">DEMO</a>
+<a target="_blank" href="http://demo.filedeo.stream/drive">DEMO</a>
 > Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, flowplayer etc).
 ![](http://i.imgur.com/L2lusZ8.png)
 
