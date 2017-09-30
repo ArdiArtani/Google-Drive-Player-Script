@@ -1,14 +1,17 @@
 <?php
 error_reporting(0);
 include "curl_gd.php";
-
+$yoursite = ""; // //www.yourdomain.com/Google-Drive-Player-Script no slash on end 
+function base64_url_encode($input) {
+ return strtr(base64_encode($input), '+/=', '._-');
+}
 if($_GET['url'] != ""){
 	$gid = $_GET['url'];
 	$original_id = my_simple_crypt($gid, 'd');
 	$title = fetch_value(file_get_contents_curl('https://drive.google.com/get_video_info?docid='.$original_id), "title=", "&");
 	$url = 'https://drive.google.com/file/d/'.$original_id.'/view';
 	$linkdown = Drive($url);
-	$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$linkdown.'"}]';
+	$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$yoursite.'/video.php?u='.base64_url_encode($linkdown).'"}]';
 }
 ?>
 <!doctype html>
