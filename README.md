@@ -1,8 +1,9 @@
 
 # Google Drive Player Script
 
-<strong>NEW TEMP VERISON: Grabs the download link</strong>
-
+<strong>NEW TEMP VERISON: Grabs the download link</strong><br>
+<a target="_blank" href="https://jauntiest-ages.000webhostapp.com/v/embed.php?url=emhacnEyRy9jTXNJWjdzVWswVHYvbUw0R0N1c0pkNG1YY21pcm81YkJOdz0=">Embed Demo with full Hidden Source</a> <br>https://github.com/Zebraslive
+<br>
 <a target="_blank" href="http://google.filedeo.com/">DEMO</a>
 > Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, flowplayer etc).
 ![](http://i.imgur.com/L2lusZ8.png)
