@@ -6,6 +6,8 @@
 		$url = $_POST['url'];
 		$gid = get_drive_id($url);
 		$iframeid = my_simple_crypt($gid);
+		$backup = 'https://drive.google.com/file/d/'.$gid.'/preview';
+		$posterimg = PosterImg($backup);
 		$linkdown = Drive($url);
 		$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$linkdown.'"}]';
 	}
@@ -45,6 +47,7 @@
 	<script type="text/javascript">
 		jwplayer("myElement").setup({
 			playlist: [{
+				"image": "<?php echo $posterimg; ?>",
 				"sources":<?php echo $file?>
 			}],
 			allowfullscreen: true,
