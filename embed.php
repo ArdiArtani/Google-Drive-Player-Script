@@ -25,6 +25,7 @@ if($_GET['url'] != ""){
 	<script type="text/javascript">
 		jwplayer("myElement").setup({
 			playlist: [{
+				"image": "<?php echo $posterimg; ?>",
 				"sources":<?php echo $file?>
 			}],
 			allowfullscreen: true,
