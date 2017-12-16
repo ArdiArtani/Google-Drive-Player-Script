@@ -25,6 +25,8 @@
 5. Submit a pull request :D
 
 ## Donate
+<h5>Ripple (XRP): rNbRzhFaX2XQfRzY7CxkDqEHNFBAbCfJM</h5>
+<img src="https://i.imgur.com/WDxWbrU.png" width="120px" />
 <h5>Stripe </h5>
 <a target="_blank" href="http://ardiartani.com/donate"><img src="https://static1.squarespace.com/static/528e97bbe4b0e2f77a6e1455/t/5293fa7ae4b0f601b40ec24e/1385429627883/Donatebutton.png" width="120px" /></a>
 
