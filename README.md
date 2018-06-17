@@ -7,6 +7,7 @@
 
 ## Getting Started
 Grab Google Drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, plyr etc).
+![](https://i.imgur.com/ituSMQm.png)
 
 ### Notes
 - Grabs download link as streaming link
