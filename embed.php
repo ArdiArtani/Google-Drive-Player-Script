@@ -1,7 +1,7 @@
 <?php
 	error_reporting(0);
 	include "curl_gd.php";
-	$base_url = 'http://demo.filedeo.stream/drive';
+	$base_url = 'https://googledriveplayer.herokuapp.com';
 
 	if(isset($_GET['id'])){
 		$eid = htmlspecialchars($_GET['id']);

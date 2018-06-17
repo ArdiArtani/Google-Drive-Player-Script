@@ -25,7 +25,7 @@ Put all files into the public/htdocs directory.
 ## Usage
 `http://<yourdomain.com>/?url=https://drive.google.com/file/d/[ID]/view`
 
-Live Demo: [http://demo.filedeo.stream/drive/](http://demo.filedeo.stream/drive/)
+Live Demo: [https://googledriveplayer.herokuapp.com/](https://googledriveplayer.herokuapp.com/)
 
 ### How to Find the Google Drive URL
 * Share that video
