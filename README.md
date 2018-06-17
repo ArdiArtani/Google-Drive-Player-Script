@@ -8,6 +8,13 @@
 ## Getting Started
 Grab Google Drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, plyr etc).
 
+### Notes
+- Grabs download link as streaming link
+- .mkv won't have sound (convert to mp4)
+- Video view limit max 2000
+
+- PHP 5+ or greater (suggest PHP 7.x)
+
 ### Prerequisites
 - Web Hosting or VPS ([Namecheap](https://affiliate.namecheap.com/?affId=61218))
 - PHP 5+ or greater (suggest PHP 7.x)
