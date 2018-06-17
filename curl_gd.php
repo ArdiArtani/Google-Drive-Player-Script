@@ -125,7 +125,12 @@ function get_drive_id($string) {
     $string = $string . "/view";
   }
   $start  = "file/d/";
-  $end    = "/view";
+
+  if(strpos($string, "/preview")){
+    $end = "/preview";
+  }elseif(strpos($string, "/view")){
+    $end = "/view";
+  }
   $string = " " . $string;
   $ini    = strpos($string, $start);
   if ($ini == 0) {
