@@ -1,60 +1,41 @@
 <?php
 
-define('HDOM_TYPE_ELEMENT', 1);
-define('HDOM_TYPE_COMMENT', 2);
-define('HDOM_TYPE_TEXT',    3);
-define('HDOM_TYPE_ENDTAG',  4);
-define('HDOM_TYPE_ROOT',    5);
-define('HDOM_TYPE_UNKNOWN', 6);
-define('HDOM_QUOTE_DOUBLE', 0);
-define('HDOM_QUOTE_SINGLE', 1);
-define('HDOM_QUOTE_NO',     3);
-define('HDOM_INFO_BEGIN',   0);
-define('HDOM_INFO_END',     1);
-define('HDOM_INFO_QUOTE',   2);
-define('HDOM_INFO_SPACE',   3);
-define('HDOM_INFO_TEXT',    4);
-define('HDOM_INFO_INNER',   5);
-define('HDOM_INFO_OUTER',   6);
-define('HDOM_INFO_ENDSPACE',7);
-
-// helper functions
-// -----------------------------------------------------------------------------
-// get html dom form file
-
 //Create folder if it doesn't already exist
 if (!file_exists('cache')) {
-    mkdir('cache', 0777, true);
+  mkdir('cache', 0777, true);
+}
+
+function GoogleDrive($gid){
+	$gdurl = 'https://drive.google.com/file/d/'.$gid.'/preview';
+	$iframeid = my_simple_crypt($gid);
+	$title = gdTitle($gid);
+	$img = gdImg($gdurl);
+	$streaming_vid = Drive($gid);
+  $output = ['id' => $gid, 'title' => $title, 'image' => $img, 'label' => 'HD', 'file' => $streaming_vid, 'type' => 'video/mp4', 'embed_id' => $iframeid];
+	$output = json_encode($output, JSON_PRETTY_PRINT);
+	return $output;
 }
 
 //Check cache
-function Drive($link) {
+function Drive($gid) {
 	$timeout = 900;
-	$file_name = md5('AA'.$link.'A3Code');
+	$file_name = md5('GD'.$gid.'player');
 	if(file_exists('cache/'.$file_name.'.cache')) {
 		$fopen = file_get_contents('cache/'.$file_name.'.cache');
 		$data = explode('@@', $fopen);
 		$now = gmdate('Y-m-d H:i:s', time() + 3600*(+7+date('I')));
 		$times = strtotime($now) - $data[0];
 		if($times >= $timeout) {
-			// $tmp = explode("file/d/",$link);
-			// $tmp2 = explode("/",$tmp[1]);
-			// $id = $tmp2[0];
-      $id = get_drive_id($link);
-			$linkdown = trim(getlink($id));
-			$create_cache	= gd_cache($link, $linkdown);
+			$linkdown = trim(getlink($gid));
+			$create_cache	= gd_cache($gid, $linkdown);
 			$arrays = explode('|', $create_cache);
 			$cache = $arrays[0];
 		} else {
 			$cache = $data[1];
 		}
 	} else {
-    // $tmp = explode("file/d/",$link);
-    // $tmp2 = explode("/",$tmp[1]);
-    // $id = $tmp2[0];
-    $id = get_drive_id($link);
-		$linkdown = trim(getlink($id));
-		$create_cache	= gd_cache($link, $linkdown);
+		$linkdown = trim(getlink($gid));
+		$create_cache	= gd_cache($gid, $linkdown);
 		$arrays = explode('|', $create_cache);
 		$cache = $arrays[0];
 	}
@@ -62,14 +43,13 @@ function Drive($link) {
 }
 
 //New cache
-function gd_cache($link, $source) {
+function gd_cache($gid, $source) {
 	$time = gmdate('Y-m-d H:i:s', time() + 3600*(+7+date('I')));
-	$file_name = md5('AA'.$link.'A3Code');
+	$file_name = md5('GD'.$gid.'player');
 	$string = strtotime($time).'@@'.$source;
 	$file = fopen("cache/".$file_name.".cache",'w');
 	fwrite($file,$string);
 	fclose($file);
-
 	if(file_exists('cache/'.$file_name.'.cache')) {
 		$msn = $source;
 	} else {
@@ -88,51 +68,47 @@ function getlink($id){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__) . "/google.mp3");
 	curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__) . "/google.mp3");
-
 	$page = curl_exec($ch);
 	$get = locheader($page);
-	if ($get != ""){
+	if (strpos($page, "Can&#39;t")) {
+		//'Sorry, the owner hasn\'t given you permission to download this file.';
+		$get = '1';
+	}elseif(strpos($page, "Error 404")) {
+		//Error 404. We\'re sorry. You can\'t access this item because it is in violation of our Terms of Service.
+		$get = '2';
+	}else{
+		if ($get != ""){
 
-	} else {
-		$html = str_get_html($page);
-		$link = urldecode(trim($html->find('a[id=uc-download-link]',0)->href));
-		$tmp = explode("confirm=",$link);
-		$tmp2 = explode("&",$tmp[1]);
-		$confirm = $tmp2[0];
-		$linkdowngoc = "https://drive.google.com/uc?export=download&id=$id&confirm=$confirm";
-		curl_setopt ($ch, CURLOPT_URL, $linkdowngoc);
-		curl_setopt($ch, CURLOPT_HEADER, TRUE);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__) . "/google.mp3");
-		curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__) . "/google.mp3");
+		} else {
+			$html = str_get_html($page);
+			$link = urldecode(trim($html->find('a[id=uc-download-link]',0)->href));
+			$tmp = explode("confirm=",$link);
+			$tmp2 = explode("&",$tmp[1]);
+			$confirm = $tmp2[0];
+			$linkdowngoc = "https://drive.google.com/uc?export=download&id=$id&confirm=$confirm";
+			curl_setopt ($ch, CURLOPT_URL, $linkdowngoc);
+			curl_setopt($ch, CURLOPT_HEADER, TRUE);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,false);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__) . "/google.mp3");
+			curl_setopt($ch, CURLOPT_COOKIEFILE, dirname(__FILE__) . "/google.mp3");
 
-		// Getting binary data
-		$page = curl_exec($ch);
-		$get =  locheader($page);
-
+			// Getting binary data
+			$page = curl_exec($ch);
+			$get =  locheader($page);
+		}
+		curl_close($ch);
 	}
-	curl_close($ch);
 	return $get;
 }
 
-function my_simple_crypt( $string, $action = 'e' ) {
-  $secret_key = 'drivekey';
-  $secret_iv = 'google';
-  $output = false;
-  $encrypt_method = "AES-256-CBC";
-  $key = hash( 'sha256', $secret_key );
-  $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
-  if( $action == 'e' ) {
-    $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-  }else if( $action == 'd' ){
-    $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
-  }
-  return $output;
+function gdTitle($gid) {
+	$title = fetch_value(file_get_contents('https://drive.google.com/get_video_info?docid='.$gid), "title=", "&");
+	return $title;
 }
 
-function PosterImg($url) {
+function gdImg($url) {
 	$html = new simple_html_dom();
 	$html->load_file($url);
 	return $html->find('meta[property=og:image]',0)->attr['content'];
@@ -153,23 +129,26 @@ function get_drive_id($string) {
   $string = " " . $string;
   $ini    = strpos($string, $start);
   if ($ini == 0) {
-    return "";
+    return null;
   }
   $ini += strlen($start);
   $len = strpos($string, $end, $ini) - $ini;
   return substr($string, $ini, $len);
 }
 
-function file_get_contents_curl($url) {
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-  curl_setopt($ch, CURLOPT_HEADER, 0);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-  $data = curl_exec($ch);
-  curl_close($ch);
-  return $data;
+function my_simple_crypt( $string, $action = 'e' ) {
+  $secret_key = 'drivekey';
+  $secret_iv = 'google';
+  $output = false;
+  $encrypt_method = "AES-256-CBC";
+  $key = hash( 'sha256', $secret_key );
+  $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
+  if( $action == 'e' ) {
+    $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
+  }else if( $action == 'd' ){
+    $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
+  }
+  return $output;
 }
 
 function fetch_value($str, $find_start = '', $find_end = ''){
@@ -192,6 +171,28 @@ function fetch_value($str, $find_start = '', $find_end = ''){
 
   return substr($substr, 0, $end);
 }
+
+// helper functions
+// -----------------------------------------------------------------------------
+// get html dom form file
+
+define('HDOM_TYPE_ELEMENT', 1);
+define('HDOM_TYPE_COMMENT', 2);
+define('HDOM_TYPE_TEXT',    3);
+define('HDOM_TYPE_ENDTAG',  4);
+define('HDOM_TYPE_ROOT',    5);
+define('HDOM_TYPE_UNKNOWN', 6);
+define('HDOM_QUOTE_DOUBLE', 0);
+define('HDOM_QUOTE_SINGLE', 1);
+define('HDOM_QUOTE_NO',     3);
+define('HDOM_INFO_BEGIN',   0);
+define('HDOM_INFO_END',     1);
+define('HDOM_INFO_QUOTE',   2);
+define('HDOM_INFO_SPACE',   3);
+define('HDOM_INFO_TEXT',    4);
+define('HDOM_INFO_INNER',   5);
+define('HDOM_INFO_OUTER',   6);
+define('HDOM_INFO_ENDSPACE',7);
 
 function locheader($page){
 	$temp = explode("\r\n", $page);
@@ -231,21 +232,6 @@ function dump_html_tree($node, $show_attr=true, $deep=0) {
 
     foreach($node->nodes as $c)
         dump_html_tree($c, $show_attr, $deep+1);
-}
-
-// get dom form file (deprecated)
-function file_get_dom() {
-    $dom = new simple_html_dom;
-    $args = func_get_args();
-    $dom->load(call_user_func_array('file_get_contents', $args), true);
-    return $dom;
-}
-
-// get dom form string (deprecated)
-function str_get_dom($str, $lowercase=true) {
-    $dom = new simple_html_dom;
-    $dom->load($str, $lowercase);
-    return $dom;
 }
 
 // simple html dom node
