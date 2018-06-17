@@ -40,9 +40,9 @@ We use [SemVer](https://semver.org/) for versioning. For the versions available,
 See also the list of [contributors](https://github.com/ArdiArtani/Google-Drive-Player-Script/contributors) who participated in this project.
 
 ## Donate
-<h5>Ripple (XRP): rNbRzhFaX2XQfRzY7CxkDqEHNFBAbCfJML</h5>
-<h5>Ethereum (ETC): 0x95082b9016bc6437565cccec38d544d26e7cfbbd</h5>
-<h5>Paypal: [Donate](https://www.paypal.me/ArdiArtani)</h5>
+* Ripple (XRP): rNbRzhFaX2XQfRzY7CxkDqEHNFBAbCfJML
+* Ethereum (ETC): 0x95082b9016bc6437565cccec38d544d26e7cfbbd
+* Paypal: [Donate](https://www.paypal.me/ArdiArtani)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
