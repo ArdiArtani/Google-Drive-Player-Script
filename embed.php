@@ -28,7 +28,7 @@
 	<!-- Plyr.io Player -->
 	<link rel="stylesheet" href="https://cdn.plyr.io/3.3.12/plyr.css">
 </head>
-<body>
+<body style="margin:0px;">
 
 	<video poster="<?php echo $results['image']; ?>" id="player" playsinline controls>
 		<source src="<?php echo $results['file'];?>" type="<?php echo $results['type'];?>">
