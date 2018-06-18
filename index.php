@@ -1,7 +1,7 @@
 <?php
 	error_reporting(0);
 	include "curl_gd.php";
-	$base_url = 'https://googledriveplayer.herokuapp.com';
+	$base_url = 'http://demo.filedeo.stream/drive';
 	$server = 'drive.google.com';
 
 	$url = isset($_GET['url']) ? htmlspecialchars($_GET['url']) : null;
@@ -10,9 +10,9 @@
 	}
 
 	if($url) {
-	  preg_match('@^(?:http.?://)?([^/]+)@i', $url, $server);
+	  preg_match('@^(?:http.?://)?([^/]+)@i', $url, $matches);
 	  $host = $matches[1];
-	  if($host != $support_domain) {
+	  if($host != $server) {
 	    echo 'Please input a valid google drive url.';
 	    exit;
 	  }
