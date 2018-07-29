@@ -1,38 +1,41 @@
 <?php
-error_reporting(0);
-include "curl_gd.php";
+	error_reporting(0);
+	include "curl_gd.php";
+	$base_url = 'http://demo.filedeo.stream/drive';
 
-if($_GET['url'] != ""){
-	$gid = $_GET['url'];
-	$original_id = my_simple_crypt($gid, 'd');
-	$title = fetch_value(file_get_contents_curl('https://drive.google.com/get_video_info?docid='.$original_id), "title=", "&");
-	$url = 'https://drive.google.com/file/d/'.$original_id.'/view';
-	$linkdown = Drive($url);
-	$file = '[{"type": "video/mp4", "label": "HD", "file": "'.$linkdown.'"}]';
-}
+	if(isset($_GET['id'])){
+		$eid = htmlspecialchars($_GET['id']);
+		$gid = my_simple_crypt($eid, 'd');
+		$results = file_get_contents($base_url.'/json.php?url=https://drive.google.com/file/d/'.$gid.'/preview');
+		$results = json_decode($results, true);
+		if($results['file']==1){
+	    echo '<center>Sorry, the owner hasn\'t given you permission to download this file.</center>';
+			exit;
+	  }elseif($results['file']==2) {
+			echo '<center>Error 404. We\'re sorry. You can\'t access this item because it is in violation of our Terms of Service.</center>';
+			exit;
+	  }
+	}
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-	<title><?php echo $title?> - Google Drive</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title><?php echo $results['title'];?></title>
+	<!-- Plyr.io Player -->
+	<link rel="stylesheet" href="https://cdn.plyr.io/3.3.12/plyr.css">
 </head>
-<body>
+<body style="margin:0px;">
 
-	<div id="myElement"></div>
+	<video poster="<?php echo $results['image']; ?>" id="player" playsinline controls>
+		<source src="<?php echo $results['file'];?>" type="<?php echo $results['type'];?>">
+	</video>
 
-	<script src="https://content.jwplatform.com/libraries/DbXZPMBQ.js"></script>
-	<script type="text/javascript">
-		jwplayer("myElement").setup({
-			playlist: [{
-				"image": "<?php echo $posterimg; ?>",
-				"sources":<?php echo $file?>
-			}],
-			allowfullscreen: true,
-			width: '100%',
-			aspectratio: '16:9',
-		});
-	</script>
-
-</body>
+	<!-- Plyr JS -->
+	<script src="https://cdn.plyr.io/3.3.12/plyr.js"></script>
+	<script>const player = new Plyr('#player');</script>
+  </body>
 </html>

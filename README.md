@@ -1,35 +1,54 @@
-
 # Google Drive Player Script
+[![GitHub issues](https://img.shields.io/github/issues/ArdiArtani/Google-Drive-Player-Script.svg)](https://github.com/ArdiArtani/Google-Drive-Player-Script/issues)
+[![GitHub forks](https://img.shields.io/github/forks/ArdiArtani/Google-Drive-Player-Script.svg)](https://github.com/ArdiArtani/Google-Drive-Player-Script/network)
+[![GitHub stars](https://img.shields.io/github/stars/ArdiArtani/Google-Drive-Player-Script.svg)](https://github.com/ArdiArtani/Google-Drive-Player-Script/stargazers)
+[![GitHub license](https://img.shields.io/github/license/ArdiArtani/Google-Drive-Player-Script.svg)](https://github.com/ArdiArtani/Google-Drive-Player-Script/blob/master/LICENSE)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/ArdiArtani/Google-Drive-Player-Script.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FArdiArtani%2FGoogle-Drive-Player-Script)
 
-<strong>NEW TEMP VERISON: Grabs the download link</strong>
+## Getting Started
+Grab Google Drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, plyr etc).
+![](https://i.imgur.com/ituSMQm.png)
 
-<a target="_blank" href="http://demo.filedeo.stream/drive">DEMO</a>
-> Grab google drive streaming links (redirector.googlevideo.com/videoplayback?..). You can use it for video players (jwplayer, videojs, flowplayer etc).
-![](http://i.imgur.com/L2lusZ8.png)
+### Notes
+- Grabs download link as streaming link
+- .mkv won't have sound (convert to mp4)
+- Video view limit max 2000
 
-## Installation
-1. Upload the downloaded .zip into your website's root folder or any other folder you want & Extract It
-2. Now run http://yourdomain.com (include folder path if you didn't upload in root folder)
-3. Paste the google drive url (https://drive.google.com/file/d/[ID]/view?usp=sharing)
-4. Click on the <b>PLAY</b> button. 
+### Prerequisites
+- Web Hosting or VPS ([Namecheap](https://affiliate.namecheap.com/?affId=61218))
+- PHP 5+ or greater (suggest PHP 7.x)
 
-## How to Find the Google Drive URL
-1. Share that video
-2. Get shareable link <i>https://drive.google.com/file/d/[ID]/view?usp=sharing</i>
+## Deployment
+Put all files into the public/htdocs directory.
+
+## Usage
+`http://<yourdomain.com>/?url=https://drive.google.com/file/d/[ID]/view`
+
+Live Demo: [https://googledriveplayer.herokuapp.com/](https://googledriveplayer.herokuapp.com/)
+
+### How to Find the Google Drive URL
+* Share that video
+* Get shareable link https://drive.google.com/file/d/[ID]/view?usp=sharing
+
+## Built With
+* [PHP Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/) - A HTML DOM parser written in PHP5+
+* [Plyr](https://github.com/sampotts/plyr) - A simple HTML5, YouTube and Vimeo player
 
 ## Contributing
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ArdiArtani/Google-Drive-Player-Script/tags).
+
+## Authors
+* **ArdiArtani** - *Initial work* - [ArdiArtani](https://github.com/ArdiArtani)
+
+See also the list of [contributors](https://github.com/ArdiArtani/Google-Drive-Player-Script/contributors) who participated in this project.
 
 ## Donate
-<h5>Ripple (XRP): rNbRzhFaX2XQfRzY7CxkDqEHNFBAbCfJML</h5>
-<img src="https://i.imgur.com/WDxWbrU.png" width="120px" />
+* Ripple (XRP): rNbRzhFaX2XQfRzY7CxkDqEHNFBAbCfJML
+* Ethereum (ETC): 0x95082b9016bc6437565cccec38d544d26e7cfbbd
+* Paypal: [Donate](https://www.paypal.me/ArdiArtani)
 
-<h5>Stripe </h5>
-<a target="_blank" href="http://ardiartani.com/donate"><img src="https://static1.squarespace.com/static/528e97bbe4b0e2f77a6e1455/t/5293fa7ae4b0f601b40ec24e/1385429627883/Donatebutton.png" width="120px" /></a>
-
-<h5>Paypal</h5>
-<a target="_blank" href="https://www.paypal.me/ArdiArtani"><img src="https://static1.squarespace.com/static/528e97bbe4b0e2f77a6e1455/t/5293fa7ae4b0f601b40ec24e/1385429627883/Donatebutton.png" width="120px" /></a>
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
