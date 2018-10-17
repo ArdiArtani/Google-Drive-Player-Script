@@ -209,8 +209,10 @@ define('HDOM_INFO_ENDSPACE',7);
 function locheader($page){
 	$temp = explode("\r\n", $page);
 	foreach ($temp as $item) {
+		if (strpos($item, ': ') !== false) {
 		$temp2 = explode(": ", $item);
 		$infoheader[$temp2[0]] = $temp2[1];
+		}
 	}
 	$location = $infoheader['Location'];
 	return $location;
