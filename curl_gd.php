@@ -108,10 +108,17 @@ function gdTitle($gid) {
 	return $title;
 }
 
-function gdImg($url) {
+function gdImg($url, $fres = false) {
 	$html = new simple_html_dom();
 	$html->load_file($url);
-	return $html->find('meta[property=og:image]',0)->attr['content'];
+	$gi = $html->find('meta[property=og:image]',0)->attr['content'];
+	if ($fres) {
+	$ge = explode("=", $gi);
+	return $ge[0]."=w1280-h720-n-k-rw";	
+	} else {
+	return $gi;	
+	}
+        
 }
 
 function get_drive_id($string) {
@@ -202,8 +209,10 @@ define('HDOM_INFO_ENDSPACE',7);
 function locheader($page){
 	$temp = explode("\r\n", $page);
 	foreach ($temp as $item) {
+		if (strpos($item, ': ') !== false) {
 		$temp2 = explode(": ", $item);
 		$infoheader[$temp2[0]] = $temp2[1];
+		}
 	}
 	$location = $infoheader['Location'];
 	return $location;
