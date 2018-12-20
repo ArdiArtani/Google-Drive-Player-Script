@@ -10,7 +10,7 @@ Grab Google Drive streaming links (redirector.googlevideo.com/videoplayback?..).
 ![](https://i.imgur.com/ituSMQm.png)
 
 ### Notes
-- Requires a Google Drive API key (create one here).
+- Requires a Google Drive API key (create one [here](https://developers.google.com/drive/api/v3/enable-sdk)).
 - Grab one streaming hotlink
 - .mkv won't have sound (convert to mp4)
 
