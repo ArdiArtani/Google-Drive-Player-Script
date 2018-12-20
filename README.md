@@ -10,9 +10,9 @@ Grab Google Drive streaming links (redirector.googlevideo.com/videoplayback?..).
 ![](https://i.imgur.com/ituSMQm.png)
 
 ### Notes
-- Grabs download link as streaming link
+- Requires a Google Drive API key (create one here).
+- Grab one streaming hotlink
 - .mkv won't have sound (convert to mp4)
-- Video view limit max 2000
 
 ### Prerequisites
 - Web Hosting or VPS ([Namecheap](https://affiliate.namecheap.com/?affId=61218))
