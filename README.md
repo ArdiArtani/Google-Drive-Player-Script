@@ -21,6 +21,8 @@ Grab Google Drive streaming links (redirector.googlevideo.com/videoplayback?..).
 ## Deployment
 Put all files into the public/htdocs directory.
 
+In drive.php enter your google drive api key (googledrive_key)
+
 ## Usage
 `http://<yourdomain.com>/?url=https://drive.google.com/file/d/[ID]/view`
 
