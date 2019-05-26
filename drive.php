@@ -27,7 +27,7 @@
 			$now = gmdate('Y-m-d H:i:s', time() + 3600*(+7+date('I')));
 			$times = strtotime($now) - $data[0];
 			if($times >= $timeout) {
-				$json_api = file_get_contents(sprintf('https://filedeo.com/api.php?id=%1$s&api=%2$s', $gid, googledrive_key));
+				$json_api = file_get_contents(sprintf('https://filedeo.com/api?id=%1$s&api=%2$s', $gid, googledrive_key));
 				$source = json_decode($json_api, true);
 				$source = $source['source'];
 				$create_cache	= gdrive_cache($gid, $source);
@@ -37,7 +37,7 @@
 				$cache = $data[1];
 			}
 		} else {
-			$json_api = file_get_contents(sprintf('https://filedeo.com/api.php?id=%1$s&api=%2$s', $gid, googledrive_key));
+			$json_api = file_get_contents(sprintf('https://filedeo.com/api?id=%1$s&api=%2$s', $gid, googledrive_key));
 			$source = json_decode($json_api, true);
 			$source = $source['source'];
 			$create_cache	= gdrive_cache($gid, $source);
